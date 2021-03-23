@@ -48,7 +48,7 @@ app.controller("proCtrl", function ($scope, $http) {
   $scope.submit = true;
   $scope.update = false;
   $scope.cancel = false;
-  $scope.userid = false;
+  $scope.typeInvoiceId = false;
   $scope.updateForm = false;
   //Create New User
   $scope.createUser = function () {
@@ -69,14 +69,14 @@ app.controller("proCtrl", function ($scope, $http) {
   };
 
    //Update User
-   $scope.updateUser = function() {
+   $scope.updateTypeInvoice = function() {
 
     //$http PUT function
     $http({
 
       method: 'PUT',
-      url: 'http://localhost:8662/users/' + $scope.user.id,
-      data: $scope.user
+      url: 'http://localhost:8662/IS/typeInvoices/' + $scope.typeInvoice.id,
+      data: $scope.typeInvoice
 
     }).then(function successCallback(response) {
 
@@ -91,19 +91,19 @@ app.controller("proCtrl", function ($scope, $http) {
   };
 
   //Delete User
-  $scope.deleteUser = function(user) {
+  $scope.deleteTypeInvoice = function(typeInvoice) {
 
     //$http DELETE function
     $http({
 
       method: 'DELETE',
-      url: 'http://localhost:8662/users/' + user.id
+      url: 'http://localhost:8662/IS/typeInvoices/' + typeInvoice.id
 
     }).then(function successCallback(response) {
 
       alert("User has deleted Successfully");
-      var index = $scope.list_users.indexOf(user);
-      $scope.list_users.splice(index, 1);
+      var index = $scope.list_typeInvoices.indexOf(typeInvoice);
+      $scope.list_typeInvoices.splice(index, 1);
 
     }, function errorCallback(response) {
 
@@ -114,24 +114,24 @@ app.controller("proCtrl", function ($scope, $http) {
   };
 
   //Set $scope on Edit button click
-  $scope.editUser = function(user) {
+  $scope.editTypeInvoice = function(typeInvoice) {
 
-    $scope.user = user;
+    $scope.typeInvoice = typeInvoice;
     $scope.submit = false;
     $scope.update = true;
     $scope.cancel = true;
-    $scope.userid = false;
+    $scope.typeInvoiceId = false;
     $scope.updateForm = true;
   };
 
 
-  //cancel Uodate
+  //cancel Update
   $scope.cancelUpdate = function() {
-    $scope.user = null;
+    $scope.typeInvoice = null;
     $scope.submit = true;
     $scope.update = false;
     $scope.cancel = false;
-    $scope.userid = true;
+    $scope.typeInvoiceId = true;
   };
 });
 
@@ -140,140 +140,111 @@ app.controller("proCtrl", function ($scope, $http) {
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid container-fluid-v1">
-            <img src="img/logo.jpg" alt="" style="width: 20%" />
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <img src="img/E-Invoice-logo.png" alt="" style="width: 10%"/>
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <div class="dropdown">
-                        <a class="nav-link text-body" href="home.html" id="navbarDropdown">HOME</a>
+                        <a
+                                class="nav-link text-body"
+                                href="/showUser"
+                        >USER</a
+                        >
+                        <div
+                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                                aria-labelledby="dropdownMenuButton"
+                                style="width: 700px"
+                        >
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-secondary" href="/addUser"
+                                    >Add User</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="dropdown">
-                        <a class="nav-link text-body" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">SHOP
+                        <a
+                                class="nav-link text-body"
+                                href="/dashboard"
+                        >INVOICE
                             <span class="absolute label_menu">HOT</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0" aria-labelledby="dropdownMenuButton"
-                             style="width: 700px">
+                        </a
+                        >
+                        <div
+                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                                aria-labelledby="dropdownMenuButton"
+                                style="width: 700px"
+                        >
                             <div class="row">
                                 <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
+                                    <a class="dropdown-item text-secondary" href="/addInvoice"
+                                    >Add Invoice</a
+                                    >
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <a class="nav-link text-body" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">FEATURED</a>
-                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0" aria-labelledby="dropdownMenuButton"
-                             style="width: 700px">
+                        <a
+                                class="nav-link text-body"
+                                href="/showTypeInvoice"
+                        >TYPE INVOICE
+                        </a
+                        >
+                        <div
+                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                                aria-labelledby="dropdownMenuButton"
+                                style="width: 700px"
+                        >
                             <div class="row">
                                 <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
+                                    <a class="dropdown-item text-secondary" href="/addTypeInvoice"
+                                    >Add Type Invoice</a
+                                    >
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <a class="nav-link text-body" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">PAGES</a>
-                        <div class="dropdown-menu dropdown-menu-right border-0 rounded-0" aria-labelledby="dropdownMenuButton"
-                             style="width: 700px">
+                        <a
+                                class="nav-link text-body"
+                                href="/showCompany"
+                        >COMPANY
+                        </a
+                        >
+                        <div
+                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                                aria-labelledby="dropdownMenuButton"
+                                style="width: 700px"
+                        >
                             <div class="row">
                                 <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <a class="nav-link text-body" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">BLOGS</a>
-                        <div class="dropdown-menu dropdown-menu-right border-0 rounded-0" aria-labelledby="dropdownMenuButton"
-                             style="width: 700px">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                </div>
-                                <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
-                                    <a class="dropdown-item text-secondary" href="#">Separated link</a>
+                                    <a class="dropdown-item text-secondary" href="/addCompany"
+                                    >Add Company</a
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -289,6 +260,50 @@ app.controller("proCtrl", function ($scope, $http) {
         </div>
     </nav>
 </header>
+<div class="container">
+    <!-- <h2>Modal Example</h2> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Type Invoice</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form class="login" style="width: 50%; margin: auto;" ng-show="updateForm">
+                        <div class="form-group" ng-show="typeInvoiceId">
+                            <label for="exampleInputId1">ID</label>
+                            <input ng-model="typeInvoice.id" type="number" class="form-control" id="exampleInputId1" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Code</label>
+                            <input ng-model="typeInvoice.code" type="text" class="form-control" id="exampleInputEmail1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Name Invoice</label>
+                            <input ng-model="typeInvoice.name_invoice" type="text" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFullname1">VAT</label>
+                            <input ng-model="typeInvoice.vat" type="number" class="form-control" id="exampleInputFullname1">
+                        </div>
+                </div>
+                <input type="button" value="update" ng-click="updateTypeInvoice()" class="btn btn-success btn-sm" style="width: 15%; margin: auto; margin-bottom: 30px;" ng-show="update" />
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <h2 style="text-align: center">Type Invoice</h2>
 <table id="dataTable" class="table table-hover" style="width: 95%;margin: auto;">
@@ -298,7 +313,6 @@ app.controller("proCtrl", function ($scope, $http) {
         <th scope="col">Code</th>
         <th scope="col">Name Invoice</th>
         <th scope="col">VAT</th>
-        <th scope="col">Type ID</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -308,8 +322,6 @@ app.controller("proCtrl", function ($scope, $http) {
         <td ng-model="code">{{typeInvoice.code}}</td>
         <td ng-model="name_invoice">{{typeInvoice.name_invoice}}</td>
         <td ng-model="vat">{{typeInvoice.vat}}</td>
-        <td ng-model="type_id">{{typeInvoice.type_id}}</td>
-        <td ng-model="role">{{typeInvoice.role}}</td>
         <td>
             <button data-toggle="modal" data-target="#myModal" class="edit" ng-click="editTypeInvoice(typeInvoice)">
                 <ion-icon name="create-outline"></ion-icon>Edit

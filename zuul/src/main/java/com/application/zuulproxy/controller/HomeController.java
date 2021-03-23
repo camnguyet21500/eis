@@ -63,4 +63,14 @@ public class HomeController {
     public String addTypeInvoice() {
         return "AddTypeInvoice"; // Trả về hello.html
     }
+
+    @GetMapping("/showCompany")
+    public String showCompany() {
+        return "ShowCompany"; // Trả về hello.html
+    }
+
+    @GetMapping("/addCompany")
+    public String addCompany() {
+        return "AddCompany"; // Trả về hello.html
+    }
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SHOW TYPE INVOICE</title>
+    <title>SHOW COMPANY</title>
 
     <!--JS library-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -33,108 +33,105 @@
 
     <!--Angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
 </head>
 <script>
-    //SHOW USER
-var app = angular.module("myApp", []);
-app.controller("proCtrl", function ($scope, $http) {
-  //show user
-  $http.get("http://localhost:8662/IS/typeInvoices").then(function (reponse) {
-    $scope.list_typeInvoices = reponse.data;
-  });
+    var app = angular.module("myApp", []);
+    app.controller("proCtrl", function ($scope, $http) {
+      //show company
+      $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
+        $scope.list_companies = reponse.data;
+      });
 
-  //Buttons Settings
-  $scope.submit = true;
-  $scope.update = false;
-  $scope.cancel = false;
-  $scope.typeInvoiceId = false;
-  $scope.updateForm = false;
-  //Create New User
-  $scope.createUser = function () {
-    //$http POST function
-    $http({
-      method: "POST",
-      url: "http://localhost:8662/users",
-      data: $scope.user,
-    }).then(
-      function successCallback(response) {
-        $scope.list_users.push(response.data);
-        alert("User has created Successfully");
-      },
-      function errorCallback(response) {
-        alert("Error. while created user Try Again!");
-      }
-    );
-  };
+      //Buttons Settings
+      $scope.submit = true;
+      $scope.update = false;
+      $scope.cancel = false;
+      $scope.companyid = false;
+      $scope.updateForm = false;
 
-   //Update User
-   $scope.updateTypeInvoice = function() {
+      //Create company
+      $scope.createCompany = function () {
+        //$http POST function
+        $http({
+          method: "POST",
+          url: "http://localhost:8662/IS/companies",
+          data: $scope.company,
+        }).then(
+          function successCallback(response) {
+            $scope.list_companies.push(response.data);
+            alert("Successfully");
+          },
+          function errorCallback(response) {
+            alert("Error. Try Again!");
+          }
+        );
+      };
 
-    //$http PUT function
-    $http({
+       //Update company
+       $scope.updateCompany = function() {
 
-      method: 'PUT',
-      url: 'http://localhost:8662/IS/typeInvoices/' + $scope.typeInvoice.id,
-      data: $scope.typeInvoice
+        //$http PUT function
+        $http({
+          method: 'PUT',
+          url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
+          data: $scope.company
 
-    }).then(function successCallback(response) {
+        }).then(function successCallback(response) {
 
-      alert("User has updated Successfully")
+          alert("Successfully")
 
-    }, function errorCallback(response) {
+        }, function errorCallback(response) {
 
-      alert("Error. while updating user Try Again!");
+          alert("Error. Try Again!");
 
+        });
+
+      };
+
+      //Delete company
+      $scope.deleteCompany = function(company) {
+
+        //$http DELETE function
+        $http({
+
+          method: 'DELETE',
+          url: 'http://localhost:8662/IS/companies/' + company.id
+
+        }).then(function successCallback(response) {
+
+          alert("Successfully");
+          var index = $scope.list_companies.indexOf(company);
+          $scope.list_companies.splice(index, 1);
+
+        }, function errorCallback(response) {
+
+          alert("Error. Try Again!");
+
+        });
+
+      };
+
+      //Set $scope on Edit button click
+      $scope.editCompany = function(company) {
+
+        $scope.company = company;
+        $scope.submit = false;
+        $scope.update = true;
+        $scope.cancel = true;
+        $scope.companyid = false;
+        $scope.updateForm = true;
+      };
+
+
+      //cancel Update
+      $scope.cancelUpdate = function() {
+        $scope.company = null;
+        $scope.submit = true;
+        $scope.update = false;
+        $scope.cancel = false;
+        $scope.companyid = true;
+      };
     });
-
-  };
-
-  //Delete User
-  $scope.deleteTypeInvoice = function(typeInvoice) {
-
-    //$http DELETE function
-    $http({
-
-      method: 'DELETE',
-      url: 'http://localhost:8662/IS/typeInvoices/' + typeInvoice.id
-
-    }).then(function successCallback(response) {
-
-      alert("User has deleted Successfully");
-      var index = $scope.list_typeInvoices.indexOf(typeInvoice);
-      $scope.list_typeInvoices.splice(index, 1);
-
-    }, function errorCallback(response) {
-
-      alert("Error. while deleting user Try Again!");
-
-    });
-
-  };
-
-  //Set $scope on Edit button click
-  $scope.editTypeInvoice = function(typeInvoice) {
-
-    $scope.typeInvoice = typeInvoice;
-    $scope.submit = false;
-    $scope.update = true;
-    $scope.cancel = true;
-    $scope.typeInvoiceId = false;
-    $scope.updateForm = true;
-  };
-
-
-  //cancel Update
-  $scope.cancelUpdate = function() {
-    $scope.typeInvoice = null;
-    $scope.submit = true;
-    $scope.update = false;
-    $scope.cancel = false;
-    $scope.typeInvoiceId = true;
-  };
-});
-
 </script>
 <body ng-app="myApp" ng-controller="proCtrl">
 <header>
@@ -260,73 +257,70 @@ app.controller("proCtrl", function ($scope, $http) {
         </div>
     </nav>
 </header>
-<div class="container">
-    <!-- <h2>Modal Example</h2> -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+<div>
+    <!-- <h2>E-INVOICE</h2> -->
+    <div class="container">
+        <!-- <h2>Modal Example</h2> -->
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Update Type Invoice</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Company</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="login" style="width: 50%; margin: auto;" ng-show="updateForm">
+                            <div class="form-group" ng-show="companyid">
+                                <label for="exampleInputId1">ID</label>
+                                <input ng-model="company.id" type="number" class="form-control" id="exampleInputId1" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Address</label>
+                                <input ng-model="company.address" type="text" class="form-control" id="exampleInputEmail1">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Name</label>
+                                <input ng-model="company.name" type="text" class="form-control" id="exampleInputPassword1"
+                                       placeholder="Enter name">
+                            </div>
+                    </div>
+                    <input type="button" value="update" ng-click="updateCompany()" class="btn btn-success btn-sm" style="width: 15%; margin: auto; margin-bottom: 30px;" ng-show="update" />
+
+                    </form>
                 </div>
-                <div class="modal-body">
-                    <form class="login" style="width: 50%; margin: auto;" ng-show="updateForm">
-                        <div class="form-group" ng-show="typeInvoiceId">
-                            <label for="exampleInputId1">ID</label>
-                            <input ng-model="typeInvoice.id" type="number" class="form-control" id="exampleInputId1" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Code</label>
-                            <input ng-model="typeInvoice.code" type="text" class="form-control" id="exampleInputEmail1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Name Invoice</label>
-                            <input ng-model="typeInvoice.name_invoice" type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFullname1">VAT</label>
-                            <input ng-model="typeInvoice.vat" type="number" class="form-control" id="exampleInputFullname1">
-                        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-                <input type="button" value="update" ng-click="updateTypeInvoice()" class="btn btn-success btn-sm" style="width: 15%; margin: auto; margin-bottom: 30px;" ng-show="update" />
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
-
-<h2 style="text-align: center">Type Invoice</h2>
+<h2 style="text-align: center">Company</h2>
 <table id="dataTable" class="table table-hover" style="width: 95%;margin: auto;">
     <thead>
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">Code</th>
-        <th scope="col">Name Invoice</th>
-        <th scope="col">VAT</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="typeInvoice in list_typeInvoices">
-        <td ng-model="id">{{typeInvoice.id}}</td>
-        <td ng-model="code">{{typeInvoice.code}}</td>
-        <td ng-model="name_invoice">{{typeInvoice.name_invoice}}</td>
-        <td ng-model="vat">{{typeInvoice.vat}}</td>
+    <tr ng-repeat="company in list_companies">
+        <td ng-model="id">{{company.id}}</td>
+        <td ng-model="name">{{company.name}}</td>
+        <td ng-model="address">{{company.address}}</td>
         <td>
-            <button data-toggle="modal" data-target="#myModal" class="edit" ng-click="editTypeInvoice(typeInvoice)">
+            <button data-toggle="modal" data-target="#myModal" class="edit" ng-click="editCompany(company)">
                 <ion-icon name="create-outline"></ion-icon>Edit
             </button>
-            <button class="delete" ng-click="deleteTypeInvoice(typeInvoice)">
+            <button class="delete" ng-click="deleteCompany(company)">
                 <ion-icon name="trash-outline"></ion-icon>Delete
             </button>
         </td>

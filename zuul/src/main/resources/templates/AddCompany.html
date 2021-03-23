@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADD INVOICE</title>
+    <title>INSERT USER</title>
 
     <!--JS library-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -33,12 +33,108 @@
     <!--Angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-    <!-- CSS -->
-<!--    <link rel="stylesheet" href="css/user.css" />-->
-
-    <!-- JS -->
-<!--    <script src="script/InvoiceScript.js"></script>-->
 </head>
+<script>
+    //SHOW company
+var app = angular.module("myApp", []);
+app.controller("proCtrl", function ($scope, $http) {
+  //show company
+  $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
+    $scope.list_companies = reponse.data;
+  });
+
+  //Buttons Settings
+  $scope.submit = true;
+  $scope.update = false;
+  $scope.cancel = false;
+  $scope.companyid = false;
+  $scope.updateForm = false;
+  //Create New company
+  $scope.createCompany = function () {
+    //$http POST function
+    $http({
+      method: "POST",
+      url: "http://localhost:8662/IS/companies",
+      data: $scope.company,
+    }).then(
+      function successCallback(response) {
+        $scope.list_companies.push(response.data);
+        alert("Company has created Successfully");
+      },
+      function errorCallback(response) {
+        alert("Error. While created company. Try Again!");
+      }
+    );
+  };
+
+   //Update company
+   $scope.updateCompany = function() {
+
+    //$http PUT function
+    $http({
+
+      method: 'PUT',
+      url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
+      data: $scope.company
+
+    }).then(function successCallback(response) {
+
+      alert("Company has updated Successfully")
+
+    }, function errorCallback(response) {
+
+      alert("Error. while updating Company Try Again!");
+
+    });
+
+  };
+
+  //Delete company
+  $scope.deleteCompany = function(company) {
+
+    //$http DELETE function
+    $http({
+
+      method: 'DELETE',
+      url: 'http://localhost:8662/IS/companies/' + company.id
+
+    }).then(function successCallback(response) {
+
+      alert("Company has deleted Successfully");
+      var index = $scope.list_companies.indexOf(company);
+      $scope.list_companies.splice(index, 1);
+
+    }, function errorCallback(response) {
+
+      alert("Error. while deleting company Try Again!");
+
+    });
+
+  };
+
+  //Set $scope on Edit button click
+  $scope.editCompany = function(company) {
+
+    $scope.company = company;
+    $scope.submit = false;
+    $scope.update = true;
+    $scope.cancel = true;
+    $scope.companyid = false;
+    $scope.updateForm = true;
+  };
+
+
+  //cancel Uodate
+  $scope.cancelUpdate = function() {
+    $scope.company = null;
+    $scope.submit = true;
+    $scope.update = false;
+    $scope.cancel = false;
+    $scope.companyid = true;
+  };
+});
+
+</script>
 <body ng-app="myApp" ng-controller="proCtrl">
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -164,42 +260,138 @@
     </nav>
 </header>
 <div>
-    <form ng-submit="createInvoice()" class="login" style="width: 50%; margin: auto;">
-        <h3>CREATE USER</h3>
+    <form ng-submit="createCompany()" class="login" style="width: 50%; margin: auto;">
+        <h3>CREATE TYPE INVOICE</h3>
         <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
-            <input ng-model="user.id" type="text" class="form-control" >
+            <label for="exampleInputEmail1">Address</label>
+            <input ng-model="company.address" type="text" class="form-control" id="exampleInputEmail1">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input ng-model="user.date" type="password" class="form-control"
-                   placeholder="Enter password">
+            <label for="exampleInputPassword1">Name</label>
+            <input ng-model="company.name" type="text" class="form-control" id="exampleInputPassword1"
+                   placeholder="Enter Nama Invoice">
         </div>
-        <div class="form-group">
-            <label for="exampleInputFullname1">Fullname</label>
-            <input ng-model="user.id_user" type="text" class="form-control" id="exampleInputFullname1"
-                   placeholder="Enter fullname">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputAddress1">Address</label>
-            <input ng-model="user.name_service" type="address" class="form-control" id="exampleInputAddress1"
-                   placeholder="Enter address">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input ng-model="user.total" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-        </div>
-</div>
 
-<div class="form-group">
-    <label for="exampleInputLimitConsume1">Limit consume</label>
-    <input ng-model="user.limit_consume" type="number" class="form-control" id="exampleInputLimitConsume1"
-           placeholder="Enter LimitConsume">
-</div>
-</div>
-</div>
-<input type="submit" value="submit" class="btn btn-success btn-sm" ng-show="submit" style="margin-bottom: 20px;" />
+        <input type="submit" value="submit" class="btn btn-success btn-sm" ng-show="submit" style="margin-bottom: 20px;" />
 
-</form>
+    </form>
 </body>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+body{
+  overflow-x: hidden;
+  font-family: "Quicksand", sans-serif;
+  text-align: center;
+}
+
+/*HEADER*/
+.navbar-nav {
+  justify-content: flex-end;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.icon > i {
+  width: 40px;
+  height: 30px;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.nav-item {
+  font-family: "Quicksand", sans-serif;
+  font-size: 17px;
+}
+
+.label_menu {
+  background-color: #e62e05;
+  color: white;
+  padding: 0px 3px;
+  font-size: 8px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 0px;
+  left: none;
+}
+
+.label_menu:before{
+  content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: inline-block;
+    top: 100%;
+    border-top: 4px solid #e62e05;
+    border-right: 4px solid transparent;
+}
+
+.dropdown {
+  font-family: "Quicksand", sans-serif;
+  padding-left: 30px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.dropdown-item:hover {
+  color: #ffa6a8;
+  background: white;
+}
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown > .dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+.col-sm-7 {
+  font-size: 13px;
+}
+
+.container-fluid-v1{
+    height: 70px;
+}
+
+/* TABLE */
+.edit{
+  color: #22cc62 !important;
+  padding: 5px;
+  border: 1px solid hsl(143, 71%, 47%);
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+
+
+.edit:hover{
+  background-color: #22cc62;
+  color: white !important;
+}
+
+a:hover{
+  text-decoration: none !important;
+}
+
+.delete{
+  color: red !important;
+  padding: 5px;
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.delete:hover{
+  background-color: red;
+  color: white !important;
+}
+</style>
 </html>
