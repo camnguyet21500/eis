@@ -48,4 +48,19 @@ public class HomeController {
     public String addUser() {
         return "AddUser"; // Trả về hello.html
     }
+
+    @GetMapping("/addInvoice")
+    public String addInvoice() {
+        return "AddInvoice"; // Trả về hello.html
+    }
+
+    @GetMapping("/showTypeInvoice")
+    public String showTypeInvoice() {
+        return "ShowTypeInvoice"; // Trả về hello.html
+    }
+
+    @GetMapping("/addTypeInvoice")
+    public String addTypeInvoice() {
+        return "AddTypeInvoice"; // Trả về hello.html
+    }
 }

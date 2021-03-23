@@ -39,7 +39,7 @@
 var app = angular.module("myApp", []);
 app.controller("proCtrl", function ($scope, $http) {
   //show company
-  $http.get("http://localhost:8662/invoices").then(function (reponse) {
+  $http.get("http://localhost:8662/IS/invoices").then(function (reponse) {
     $scope.list_invoices = reponse.data;
   });
 
@@ -51,7 +51,7 @@ app.controller("proCtrl", function ($scope, $http) {
     $http({
 
       method: 'DELETE',
-      url: 'http://localhost:8662/invoices/' + invoice.id
+      url: 'http://localhost:8662/IS/invoices/' + invoice.id
 
     }).then(function successCallback(response) {
 
@@ -75,8 +75,7 @@ app.controller("proCtrl", function ($scope, $http) {
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid container-fluid-v1">
-            <img src="img/logo.jpg
-" alt="" style="width: 20%"/>
+            <img src="img/E-Invoice-logo.png" alt="" style="width: 10%"/>
             <button
                     class="navbar-toggler"
                     type="button"
@@ -114,17 +113,12 @@ app.controller("proCtrl", function ($scope, $http) {
                         </div>
                     </div>
                     <div class="dropdown">
-                        <a class="nav-link text-body" href="/addUser" >Show USer
-                            <span class="absolute label_menu">HOT</span>
-                        </a>
-
-                    </div>
-
-                    <div class="dropdown">
                         <a
                                 class="nav-link text-body"
-                                href="/addUser"
-                        >FEATURED</a
+                                href="/dashboard"
+                        >INVOICE
+                            <span class="absolute label_menu">HOT</span>
+                        </a
                         >
                         <div
                                 class="dropdown-menu dropdown-menu-left border-0 rounded-0"
@@ -133,16 +127,34 @@ app.controller("proCtrl", function ($scope, $http) {
                         >
                             <div class="row">
                                 <div class="col-sm">
-                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="#"
-                                    >Separated link</a
+                                    <a class="dropdown-item text-secondary" href="/addInvoice"
+                                    >Add Invoice</a
                                     >
-                                    <a class="dropdown-item text-secondary" href="#"
-                                    >Separated link</a
-                                    >
-                                    <a class="dropdown-item text-secondary" href="#"
-                                    >Separated link</a
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <a
+                                class="nav-link text-body"
+                                href="/showTypeInvoice"
+                        >TYPE INVOICE
+                        </a
+                        >
+                        <div
+                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                                aria-labelledby="dropdownMenuButton"
+                                style="width: 700px"
+                        >
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a class="dropdown-item" href="">Action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-secondary" href="/addTypeInvoice"
+                                    >Add Type Invoice</a
                                     >
                                 </div>
                             </div>

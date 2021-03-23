@@ -43,8 +43,9 @@ public class UserEntity {
     @Column(name="limit_consume")
     private float limit_consume;
 
+    @NotNull
     @Column(name = "role")
-    private String role;
+    private String role = "user";
 
     public UserEntity() {
     }
