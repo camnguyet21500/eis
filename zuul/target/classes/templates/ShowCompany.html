@@ -35,104 +35,103 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <script>
-//SHOW company
-var app = angular.module("myApp", []);
-app.controller("proCtrl", function ($scope, $http) {
-  //show company
-  $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
-    $scope.list_companies = reponse.data;
-  });
+    var app = angular.module("myApp", []);
+    app.controller("proCtrl", function ($scope, $http) {
+      //show company
+      $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
+        $scope.list_companies = reponse.data;
+      });
 
-  //Buttons Settings
-  $scope.submit = true;
-  $scope.update = false;
-  $scope.cancel = false;
-  $scope.companyid = false;
-  $scope.updateForm = false;
-  //Create New company
-  $scope.createCompany = function () {
-    //$http POST function
-    $http({
-      method: "POST",
-      url: "http://localhost:8662/IS/companies",
-      data: $scope.company,
-    }).then(
-      function successCallback(response) {
-        $scope.list_companies.push(response.data);
-        alert("Company has created Successfully");
-      },
-      function errorCallback(response) {
-        alert("Error. While created company. Try Again!");
-      }
-    );
-  };
+      //Buttons Settings
+      $scope.submit = true;
+      $scope.update = false;
+      $scope.cancel = false;
+      $scope.companyid = false;
+      $scope.updateForm = false;
 
-   //Update company
-   $scope.updateCompany = function() {
+      //Create company
+      $scope.createCompany = function () {
+        //$http POST function
+        $http({
+          method: "POST",
+          url: "http://localhost:8662/IS/companies",
+          data: $scope.company,
+        }).then(
+          function successCallback(response) {
+            $scope.list_companies.push(response.data);
+            alert("Successfully");
+          },
+          function errorCallback(response) {
+            alert("Error. Try Again!");
+          }
+        );
+      };
 
-    //$http PUT function
-    $http({
+       //Update company
+       $scope.updateCompany = function() {
 
-      method: 'PUT',
-      url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
-      data: $scope.company
+        //$http PUT function
+        $http({
+          method: 'PUT',
+          url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
+          data: $scope.company
 
-    }).then(function successCallback(response) {
+        }).then(function successCallback(response) {
 
-      alert("Company has updated Successfully")
+          alert("Successfully")
 
-    }, function errorCallback(response) {
+        }, function errorCallback(response) {
 
-      alert("Error. while updating Company Try Again!");
+          alert("Error. Try Again!");
 
+        });
+
+      };
+
+      //Delete company
+      $scope.deleteCompany = function(company) {
+
+        //$http DELETE function
+        $http({
+
+          method: 'DELETE',
+          url: 'http://localhost:8662/IS/companies/' + company.id
+
+        }).then(function successCallback(response) {
+
+          alert("Successfully");
+          var index = $scope.list_companies.indexOf(company);
+          $scope.list_companies.splice(index, 1);
+
+        }, function errorCallback(response) {
+
+          alert("Error. Try Again!");
+
+        });
+
+      };
+
+      //Set $scope on Edit button click
+      $scope.editCompany = function(company) {
+
+        $scope.company = company;
+        $scope.submit = false;
+        $scope.update = true;
+        $scope.cancel = true;
+        $scope.companyid = false;
+        $scope.updateForm = true;
+      };
+
+
+      //cancel Update
+      $scope.cancelUpdate = function() {
+        $scope.company = null;
+        $scope.submit = true;
+        $scope.update = false;
+        $scope.cancel = false;
+        $scope.companyid = true;
+      };
     });
-
-  };
-
-  //Delete company
-  $scope.deleteCompany = function(company) {
-
-    //$http DELETE function
-    $http({
-
-      method: 'DELETE',
-      url: 'http://localhost:8662/IS/companies/' + company.id
-
-    }).then(function successCallback(response) {
-
-      alert("Company has deleted Successfully");
-      var index = $scope.list_companies.indexOf(company);
-      $scope.list_companies.splice(index, 1);
-
-    }, function errorCallback(response) {
-
-      alert("Error. while deleting company Try Again!");
-
-    });
-
-  };
-
-  //Set $scope on Edit button click
-  $scope.editCompany = function(company) {
-
-    $scope.company = company;
-    $scope.submit = false;
-    $scope.update = true;
-    $scope.cancel = true;
-    $scope.companyid = false;
-    $scope.updateForm = true;
-  };
-
-
-  //cancel Uodate
-  $scope.cancelUpdate = function() {
-    $scope.company = null;
-    $scope.submit = true;
-    $scope.update = false;
-    $scope.cancel = false;
-    $scope.companyid = true;
-  };
-});
 </script>
 <body ng-app="myApp" ng-controller="proCtrl">
 <header>
@@ -287,7 +286,7 @@ app.controller("proCtrl", function ($scope, $http) {
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Name</label>
-                                <input ng-model="company.name" type="password" class="form-control" id="exampleInputPassword1"
+                                <input ng-model="company.name" type="text" class="form-control" id="exampleInputPassword1"
                                        placeholder="Enter name">
                             </div>
                     </div>
