@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SHOW COMPANY</title>
+    <title>COMPANY | E-INVOICE SYSTEM</title>
 
     <!--JS library-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -37,211 +37,136 @@
 <script>
     var app = angular.module("myApp", []);
     app.controller("proCtrl", function ($scope, $http) {
-      //show company
-      $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
-        $scope.list_companies = reponse.data;
-      });
-
-      //Buttons Settings
-      $scope.submit = true;
-      $scope.update = false;
-      $scope.cancel = false;
-      $scope.companyid = false;
-      $scope.updateForm = false;
-
-      //Create company
-      $scope.createCompany = function () {
-        //$http POST function
-        $http({
-          method: "POST",
-          url: "http://localhost:8662/IS/companies",
-          data: $scope.company,
-        }).then(
-          function successCallback(response) {
-            $scope.list_companies.push(response.data);
-            alert("Successfully");
-          },
-          function errorCallback(response) {
-            alert("Error. Try Again!");
-          }
-        );
-      };
-
-       //Update company
-       $scope.updateCompany = function() {
-
-        //$http PUT function
-        $http({
-          method: 'PUT',
-          url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
-          data: $scope.company
-
-        }).then(function successCallback(response) {
-
-          alert("Successfully")
-
-        }, function errorCallback(response) {
-
-          alert("Error. Try Again!");
-
+        //SHOW COMPANY
+        $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
+            $scope.list_companies = reponse.data;
         });
 
-      };
-
-      //Delete company
-      $scope.deleteCompany = function(company) {
-
-        //$http DELETE function
-        $http({
-
-          method: 'DELETE',
-          url: 'http://localhost:8662/IS/companies/' + company.id
-
-        }).then(function successCallback(response) {
-
-          alert("Successfully");
-          var index = $scope.list_companies.indexOf(company);
-          $scope.list_companies.splice(index, 1);
-
-        }, function errorCallback(response) {
-
-          alert("Error. Try Again!");
-
-        });
-
-      };
-
-      //Set $scope on Edit button click
-      $scope.editCompany = function(company) {
-
-        $scope.company = company;
-        $scope.submit = false;
-        $scope.update = true;
-        $scope.cancel = true;
-        $scope.companyid = false;
-        $scope.updateForm = true;
-      };
-
-
-      //cancel Update
-      $scope.cancelUpdate = function() {
-        $scope.company = null;
-        $scope.submit = true;
+        //BUTTONS SETTING
         $scope.update = false;
         $scope.cancel = false;
-        $scope.companyid = true;
-      };
+        $scope.companyid = false;
+        $scope.updateForm = false;
+
+        //UPDATE COMPANY
+        $scope.updateCompany = function () {
+
+            //$http PUT function
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
+                data: $scope.company
+            }).then(function successCallback(response) {
+                alert("Successfully")
+            }, function errorCallback(response) {
+                alert("Error. Try Again!");
+            });
+        };
+
+        //DELETE COMPANY
+        $scope.deleteCompany = function (company) {
+            //$http DELETE function
+            $http({
+                method: 'DELETE',
+                url: 'http://localhost:8662/IS/companies/' + company.id
+            }).then(function successCallback(response) {
+                alert("Successfully");
+                var index = $scope.list_companies.indexOf(company);
+                $scope.list_companies.splice(index, 1);
+            }, function errorCallback(response) {
+                alert("Error. Try Again!");
+            });
+        };
+
+        //Set $scope on Edit button click
+        $scope.editCompany = function (company) {
+
+            $scope.company = company;
+            $scope.update = true;
+            $scope.cancel = true;
+            $scope.companyid = false;
+            $scope.updateForm = true;
+        };
+
+
+        //CANCEL UPDATE
+        $scope.cancelUpdate = function () {
+            $scope.company = null;
+            $scope.update = false;
+            $scope.cancel = false;
+            $scope.companyid = true;
+        };
     });
 </script>
+
 <body ng-app="myApp" ng-controller="proCtrl">
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid container-fluid-v1">
-            <img src="img/E-Invoice-logo.png" alt="" style="width: 10%"/>
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-            >
+            <img src="img/E-Invoice-logo.png" alt="" style="width: 10%" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/showUser"
-                        >USER</a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        <a class="nav-link text-body" href="/showUser">USER</a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="#">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addUser"
-                                    >Add User</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addUser">Add User</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/dashboard"
-                        >INVOICE
+                        <a class="nav-link text-body" href="/dashboard">INVOICE
                             <span class="absolute label_menu">HOT</span>
-                        </a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addInvoice"
-                                    >Add Invoice</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addInvoice">Add Invoice</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/showTypeInvoice"
-                        >TYPE INVOICE
-                        </a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        <a class="nav-link text-body" href="/showTypeInvoice">TYPE INVOICE
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addTypeInvoice"
-                                    >Add Type Invoice</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addTypeInvoice">Add Type
+                                        Invoice</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/showCompany"
-                        >COMPANY
-                        </a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        <a class="nav-link text-body" href="/showCompany">COMPANY
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addCompany"
-                                    >Add Company</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addCompany">Add Company</a>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +186,6 @@
 <div>
     <!-- <h2>E-INVOICE</h2> -->
     <div class="container">
-        <!-- <h2>Modal Example</h2> -->
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -277,22 +201,25 @@
                     <div class="modal-body">
                         <form class="login" style="width: 50%; margin: auto;" ng-show="updateForm">
                             <div class="form-group" ng-show="companyid">
-                                <label for="exampleInputId1">ID</label>
-                                <input ng-model="company.id" type="number" class="form-control" id="exampleInputId1" readonly>
+                                <label>ID</label>
+                                <input ng-model="company.id" type="number" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Address</label>
-                                <input ng-model="company.address" type="text" class="form-control" id="exampleInputEmail1">
+                                <label>Address</label>
+                                <input ng-model="company.address" type="text" class="form-control"
+                                       placeholder="Please enter company's address">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Name</label>
-                                <input ng-model="company.name" type="text" class="form-control" id="exampleInputPassword1"
-                                       placeholder="Enter name">
+                                <label>Name</label>
+                                <input ng-model="company.name" type="text" class="form-control"
+                                       placeholder="Please enter company's name">
                             </div>
-                    </div>
-                    <input type="button" value="update" ng-click="updateCompany()" class="btn btn-success btn-sm" style="width: 15%; margin: auto; margin-bottom: 30px;" ng-show="update" />
 
-                    </form>
+                            <input type="button" value="Update" ng-click="updateCompany()"
+                                   class="btn btn-success btn-sm"
+                                   style="width: 30%; margin: auto; margin-bottom: 30px;" ng-show="update" />
+                        </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -329,121 +256,122 @@
 </table>
 </body>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
-body{
-  overflow-x: hidden;
-  font-family: "Quicksand", sans-serif;
-  text-align: center;
-}
+    body {
+        overflow-x: hidden;
+        font-family: "Quicksand", sans-serif;
+        text-align: center;
+    }
 
-/*HEADER*/
-.navbar-nav {
-  justify-content: flex-end;
-  padding-left: 15px;
-  padding-right: 15px;
-}
+    /*HEADER*/
+    .navbar-nav {
+        justify-content: flex-end;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-.icon > i {
-  width: 40px;
-  height: 30px;
-}
+    .icon>i {
+        width: 40px;
+        height: 30px;
+    }
 
-.navbar-collapse {
-  flex-grow: 0;
-}
+    .navbar-collapse {
+        flex-grow: 0;
+    }
 
-.nav-item {
-  font-family: "Quicksand", sans-serif;
-  font-size: 17px;
-}
+    .nav-item {
+        font-family: "Quicksand", sans-serif;
+        font-size: 17px;
+    }
 
-.label_menu {
-  background-color: #e62e05;
-  color: white;
-  padding: 0px 3px;
-  font-size: 8px;
-  font-weight: 600;
-  font-family: Arial, Helvetica, sans-serif;
-  position: absolute;
-  top: 0px;
-  left: none;
-}
+    .label_menu {
+        background-color: #e62e05;
+        color: white;
+        padding: 0px 3px;
+        font-size: 8px;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        top: 0px;
+        left: none;
+    }
 
-.label_menu:before{
-  content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    display: inline-block;
-    top: 100%;
-    border-top: 4px solid #e62e05;
-    border-right: 4px solid transparent;
-}
+    .label_menu:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        display: inline-block;
+        top: 100%;
+        border-top: 4px solid #e62e05;
+        border-right: 4px solid transparent;
+    }
 
-.dropdown {
-  font-family: "Quicksand", sans-serif;
-  padding-left: 30px;
-  font-size: 17px;
-  font-weight: 500;
-}
+    .dropdown {
+        font-family: "Quicksand", sans-serif;
+        padding-left: 30px;
+        font-size: 17px;
+        font-weight: 500;
+    }
 
-.dropdown-item:hover {
-  color: #ffa6a8;
-  background: white;
-}
+    .dropdown-item:hover {
+        color: #ffa6a8;
+        background: white;
+    }
 
-.dropdown:hover > .dropdown-menu {
-  display: block;
-}
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+    }
 
-.dropdown > .dropdown-toggle:active {
-  /*Without this, clicking will make it sticky*/
-  pointer-events: none;
-}
+    .dropdown>.dropdown-toggle:active {
+        /*Without this, clicking will make it sticky*/
+        pointer-events: none;
+    }
 
-.col-sm-7 {
-  font-size: 13px;
-}
+    .col-sm-7 {
+        font-size: 13px;
+    }
 
-.container-fluid-v1{
-    height: 70px;
-}
+    .container-fluid-v1 {
+        height: 70px;
+    }
 
-/* TABLE */
-.edit{
-  color: #22cc62 !important;
-  padding: 5px;
-  border: 1px solid hsl(143, 71%, 47%);
-  border-radius: 5px;
-  margin-right: 10px;
-  background-color: white;
-}
+    /* TABLE */
+    .edit {
+        color: #22cc62 !important;
+        padding: 5px;
+        border: 1px solid hsl(143, 71%, 47%);
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: white;
+    }
 
 
 
-.edit:hover{
-  background-color: #22cc62;
-  color: white !important;
-}
+    .edit:hover {
+        background-color: #22cc62;
+        color: white !important;
+    }
 
-a:hover{
-  text-decoration: none !important;
-}
+    a:hover {
+        text-decoration: none !important;
+    }
 
-.delete{
-  color: red !important;
-  padding: 5px;
-  border: 1px solid red;
-  border-radius: 5px;
-  background-color: white;
-}
+    .delete {
+        color: red !important;
+        padding: 5px;
+        border: 1px solid red;
+        border-radius: 5px;
+        background-color: white;
+    }
 
-.delete:hover{
-  background-color: red;
-  color: white !important;
-}
+    .delete:hover {
+        background-color: red;
+        color: white !important;
+    }
 </style>
+
 </html>

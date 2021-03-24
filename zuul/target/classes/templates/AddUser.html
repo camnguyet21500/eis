@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSERT USER</title>
+    <title>INSERT USER | E-INVOICE SYSTEM</title>
 
     <!--JS library-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -32,122 +33,76 @@
 
     <!--Angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
-    <!-- CSS -->
-<!--    <link rel="stylesheet" href="css/user.css" />-->
-
-    <!-- JS -->
-<!--    <script src="script/UserScript.js"></script>-->
 </head>
+
 <body ng-app="myApp" ng-controller="proCtrl">
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid container-fluid-v1">
-            <img src="img/E-Invoice-logo.png" alt="" style="width: 10%"/>
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-            >
+            <img src="img/E-Invoice-logo.png" alt="" style="width: 10%" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/showUser"
-                        >USER</a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        <a class="nav-link text-body" href="/showUser">USER</a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="#">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addUser"
-                                    >Add User</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addUser">Add User</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/dashboard"
-                        >INVOICE
+                        <a class="nav-link text-body" href="/dashboard">INVOICE
                             <span class="absolute label_menu">HOT</span>
-                        </a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addInvoice"
-                                    >Add Invoice</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addInvoice">Add Invoice</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/showTypeInvoice"
-                        >TYPE INVOICE
-                        </a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        <a class="nav-link text-body" href="/showTypeInvoice">TYPE INVOICE
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addTypeInvoice"
-                                    >Add Type Invoice</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addTypeInvoice">Add Type
+                                        Invoice</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <a
-                                class="nav-link text-body"
-                                href="/showCompany"
-                        >COMPANY
-                        </a
-                        >
-                        <div
-                                class="dropdown-menu dropdown-menu-left border-0 rounded-0"
-                                aria-labelledby="dropdownMenuButton"
-                                style="width: 700px"
-                        >
+                        <a class="nav-link text-body" href="/showCompany">COMPANY
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left border-0 rounded-0"
+                             aria-labelledby="dropdownMenuButton" style="width: 700px">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="dropdown-item" href="">Action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-secondary" href="/addCompany"
-                                    >Add Company</a
-                                    >
+                                    <a class="dropdown-item text-secondary" href="/addCompany">Add Company</a>
                                 </div>
                             </div>
                         </div>
@@ -163,260 +118,191 @@
         </div>
     </nav>
 </header>
+
 <div>
     <form ng-submit="createUser()" class="login" style="width: 50%; margin: auto;">
         <h3>CREATE USER</h3>
         <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
-            <input ng-model="user.username" type="text" class="form-control" id="exampleInputEmail1">
+            <label>Username</label>
+            <input ng-model="user.username" type="text" class="form-control"
+                   placeholder="Please enter your username">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input ng-model="user.password" type="password" class="form-control" id="exampleInputPassword1"
-                   placeholder="Enter password">
+            <label>Password</label>
+            <input ng-model="user.password" type="password" class="form-control"
+                   placeholder="Please enter your password">
         </div>
         <div class="form-group">
-            <label for="exampleInputFullname1">Fullname</label>
-            <input ng-model="user.fullname" type="text" class="form-control" id="exampleInputFullname1"
-                   placeholder="Enter fullname">
+            <label>Fullname</label>
+            <input ng-model="user.fullname" type="text" class="form-control"
+                   placeholder="Please enter your fullname">
         </div>
         <div class="form-group">
-            <label for="exampleInputAddress1">Address</label>
-            <input ng-model="user.address" type="address" class="form-control" id="exampleInputAddress1"
-                   placeholder="Enter address">
+            <label>Address</label>
+            <input ng-model="user.address" type="address" class="form-control"
+                   placeholder="Please enter your address">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input ng-model="user.email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            <label>Email</label>
+            <input ng-model="user.email" type="email" class="form-control" placeholder="Please enter your email">
         </div>
         <div class="form-group">
-            <label for="exampleInputLimitConsume1">Limit consume</label>
-            <input ng-model="user.limit_consume" type="number" class="form-control" id="exampleInputLimitConsume1"
-                   placeholder="Enter LimitConsume">
+            <label>Limit consume</label>
+            <input ng-model="user.limit_consume" type="number" class="form-control" placeholder="Please enter your limit consume">
         </div>
+        <input type="submit" value="Submit" class="btn btn-success btn-sm" ng-show="submit"
+               style="margin-bottom: 20px;" />
+    </form>
 </div>
-</div>
-<input type="submit" value="submit" class="btn btn-success btn-sm" ng-show="submit" style="margin-bottom: 20px;" />
-
-</form>
 </body>
 <script>
-    //SHOW USER
-var app = angular.module("myApp", []);
-app.controller("proCtrl", function ($scope, $http) {
-  //show user
-  $http.get("http://localhost:8662/users").then(function (reponse) {
-    $scope.list_users = reponse.data;
-  });
 
-  //Buttons Settings
-  $scope.submit = true;
-  $scope.update = false;
-  $scope.cancel = false;
-  $scope.userid = false;
-  $scope.updateForm = false;
-  //Create New User
-  $scope.createUser = function () {
-    //$http POST function
-    $http({
-      method: "POST",
-      url: "http://localhost:8662/users",
-      data: $scope.user,
-    }).then(
-      function successCallback(response) {
-        $scope.list_users.push(response.data);
-        alert("User has created Successfully");
-      },
-      function errorCallback(response) {
-        alert("Error. while created user Try Again!");
-      }
-    );
-  };
+    var app = angular.module("myApp", []);
+    app.controller("proCtrl", function ($scope, $http) {
+        //SHOW USER
+        $http.get("http://localhost:8662/users").then(function (reponse) {
+            $scope.list_users = reponse.data;
+        });
 
-   //Update User
-   $scope.updateUser = function() {
+        //BUTTONS SETTING
+        $scope.submit = true;
 
-    //$http PUT function
-    $http({
-
-      method: 'PUT',
-      url: 'http://localhost:8662/users/' + $scope.user.id,
-      data: $scope.user
-
-    }).then(function successCallback(response) {
-
-      alert("User has updated Successfully")
-
-    }, function errorCallback(response) {
-
-      alert("Error. while updating user Try Again!");
-
+        //CREATE USER
+        $scope.createUser = function () {
+            //$http POST function
+            $http({
+                method: "POST",
+                url: "http://localhost:8662/users",
+                data: $scope.user,
+            }).then(
+                function successCallback(response) {
+                    $scope.list_users.push(response.data);
+                    alert("Successfully!");
+                },
+                function errorCallback(response) {
+                    alert("Error. Try again!");
+                }
+            );
+        };
     });
-
-  };
-
-  //Delete User
-  $scope.deleteUser = function(user) {
-
-    //$http DELETE function
-    $http({
-
-      method: 'DELETE',
-      url: 'http://localhost:8662/users/' + user.id
-
-    }).then(function successCallback(response) {
-
-      alert("User has deleted Successfully");
-      var index = $scope.list_users.indexOf(user);
-      $scope.list_users.splice(index, 1);
-
-    }, function errorCallback(response) {
-
-      alert("Error. while deleting user Try Again!");
-
-    });
-
-  };
-
-  //Set $scope on Edit button click
-  $scope.editUser = function(user) {
-
-    $scope.user = user;
-    $scope.submit = false;
-    $scope.update = true;
-    $scope.cancel = true;
-    $scope.userid = false;
-    $scope.updateForm = true;
-  };
-
-
-  //cancel Uodate
-  $scope.cancelUpdate = function() {
-    $scope.user = null;
-    $scope.submit = true;
-    $scope.update = false;
-    $scope.cancel = false;
-    $scope.userid = true;
-  };
-});
-
 </script>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
-body{
-  overflow-x: hidden;
-  font-family: "Quicksand", sans-serif;
-  text-align: center;
-}
+    body {
+        overflow-x: hidden;
+        font-family: "Quicksand", sans-serif;
+        text-align: center;
+    }
 
-/*HEADER*/
-.navbar-nav {
-  justify-content: flex-end;
-  padding-left: 15px;
-  padding-right: 15px;
-}
+    /*HEADER*/
+    .navbar-nav {
+        justify-content: flex-end;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-.icon > i {
-  width: 40px;
-  height: 30px;
-}
+    .icon>i {
+        width: 40px;
+        height: 30px;
+    }
 
-.navbar-collapse {
-  flex-grow: 0;
-}
+    .navbar-collapse {
+        flex-grow: 0;
+    }
 
-.nav-item {
-  font-family: "Quicksand", sans-serif;
-  font-size: 17px;
-}
+    .nav-item {
+        font-family: "Quicksand", sans-serif;
+        font-size: 17px;
+    }
 
-.label_menu {
-  background-color: #e62e05;
-  color: white;
-  padding: 0px 3px;
-  font-size: 8px;
-  font-weight: 600;
-  font-family: Arial, Helvetica, sans-serif;
-  position: absolute;
-  top: 0px;
-  left: none;
-}
+    .label_menu {
+        background-color: #e62e05;
+        color: white;
+        padding: 0px 3px;
+        font-size: 8px;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        top: 0px;
+        left: none;
+    }
 
-.label_menu:before{
-  content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    display: inline-block;
-    top: 100%;
-    border-top: 4px solid #e62e05;
-    border-right: 4px solid transparent;
-}
+    .label_menu:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        display: inline-block;
+        top: 100%;
+        border-top: 4px solid #e62e05;
+        border-right: 4px solid transparent;
+    }
 
-.dropdown {
-  font-family: "Quicksand", sans-serif;
-  padding-left: 30px;
-  font-size: 17px;
-  font-weight: 500;
-}
+    .dropdown {
+        font-family: "Quicksand", sans-serif;
+        padding-left: 30px;
+        font-size: 17px;
+        font-weight: 500;
+    }
 
-.dropdown-item:hover {
-  color: #ffa6a8;
-  background: white;
-}
+    .dropdown-item:hover {
+        color: #ffa6a8;
+        background: white;
+    }
 
-.dropdown:hover > .dropdown-menu {
-  display: block;
-}
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+    }
 
-.dropdown > .dropdown-toggle:active {
-  /*Without this, clicking will make it sticky*/
-  pointer-events: none;
-}
+    .dropdown>.dropdown-toggle:active {
+        /*Without this, clicking will make it sticky*/
+        pointer-events: none;
+    }
 
-.col-sm-7 {
-  font-size: 13px;
-}
+    .col-sm-7 {
+        font-size: 13px;
+    }
 
-.container-fluid-v1{
-    height: 70px;
-}
+    .container-fluid-v1 {
+        height: 70px;
+    }
 
-/* TABLE */
-.edit{
-  color: #22cc62 !important;
-  padding: 5px;
-  border: 1px solid hsl(143, 71%, 47%);
-  border-radius: 5px;
-  margin-right: 10px;
-  background-color: white;
-}
+    /* TABLE */
+    .edit {
+        color: #22cc62 !important;
+        padding: 5px;
+        border: 1px solid hsl(143, 71%, 47%);
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: white;
+    }
 
 
 
-.edit:hover{
-  background-color: #22cc62;
-  color: white !important;
-}
+    .edit:hover {
+        background-color: #22cc62;
+        color: white !important;
+    }
 
-a:hover{
-  text-decoration: none !important;
-}
+    a:hover {
+        text-decoration: none !important;
+    }
 
-.delete{
-  color: red !important;
-  padding: 5px;
-  border: 1px solid red;
-  border-radius: 5px;
-  background-color: white;
-}
+    .delete {
+        color: red !important;
+        padding: 5px;
+        border: 1px solid red;
+        border-radius: 5px;
+        background-color: white;
+    }
 
-.delete:hover{
-  background-color: red;
-  color: white !important;
-}
+    .delete:hover {
+        background-color: red;
+        color: white !important;
+    }
 </style>
+
 </html>
