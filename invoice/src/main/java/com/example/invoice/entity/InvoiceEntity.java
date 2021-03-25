@@ -1,5 +1,7 @@
 package com.example.invoice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -29,12 +31,14 @@ public class InvoiceEntity {
     @Column(name = "total")
     private float total;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
     private TypeInvoiceEntity type_id;
 
+    @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
     private CompanyEntity company_id;
 
     public InvoiceEntity() {

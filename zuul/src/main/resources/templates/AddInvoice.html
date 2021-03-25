@@ -67,6 +67,7 @@
                 method: "POST",
                 url: "http://localhost:8662/IS/invoices",
                 data: $scope.invoice,
+
             }).then(
                 function successCallback(response) {
                     $scope.list_invoices.push(response.data);
@@ -173,9 +174,9 @@
         </div>
         <div class="form-group">
             <label>ID User</label>
-            <select class="form-control">
+            <select ng-model="invoice.id_user.id" class="form-control">
                 <option ng-repeat="user in list_users">
-                    {{user.username}}
+                    {{user.id}}
                 </option>
             </select>
         </div>
@@ -189,21 +190,21 @@
         </div>
         <div class="form-group">
             <label>Type ID</label>
-            <select class="form-control">
+            <select ng-model="invoice.type_id.id" class="form-control">
                 <option ng-repeat="typeInvoice in list_typeInvoices">
-                    {{typeInvoice.code}}
+                    {{typeInvoice.id}}
                 </option>
             </select>
         </div>
         <div class="form-group">
             <label>Company ID</label>
-            <select class="form-control">
+            <select ng-model="invoice.company_id.id" class="form-control">
                 <option ng-repeat="company in list_companies">
-                    {{company.name}}
+                    {{company.id}}
                 </option>
             </select>
         </div>
-        <input type="submit" value="submit" class="btn btn-success btn-sm" ng-show="submit"
+        <input type="submit" value="Submit" class="btn btn-success btn-sm" ng-show="submit"
                style="margin-bottom: 20px" />
     </form>
 </div>
