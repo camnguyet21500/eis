@@ -2,11 +2,15 @@ package com.dxc.user.controller;
 
 import com.dxc.user.entity.UserEntity;
 import com.dxc.user.service.UserService;
+import com.dxc.user.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 
@@ -27,7 +31,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity){
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+        String siteURL = Utility.getSiteURL(request);
+        userService.sendVerificationEmail(userEntity, siteURL);
         return ResponseEntity.ok().body(this.userService.createUser(userEntity));
     }
 

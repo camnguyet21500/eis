@@ -14,7 +14,7 @@ public class UserEntity {
     private long id;
 
     @Column(name = "active")
-    private boolean active = true;
+    private boolean active;
 
     @NotNull
     @Column(name = "username")
@@ -46,6 +46,9 @@ public class UserEntity {
     @NotNull
     @Column(name = "role")
     private String role = "user";
+
+    @Column(name = "verification_code", updatable = false)
+    private String verification_code;
 
     public UserEntity() {
     }
@@ -122,4 +125,13 @@ public class UserEntity {
     public void setLimit_consume(float limit_consume) {
         this.limit_consume = limit_consume;
     }
+
+    public String getVerification_code() {
+        return verification_code;
+    }
+
+    public void setVerification_code(String verification_code) {
+        this.verification_code = verification_code;
+    }
 }
+
