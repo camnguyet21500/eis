@@ -280,8 +280,8 @@
         <th scope="col">ID User</th>
         <th scope="col">Name Service</th>
         <th scope="col">Total</th>
-        <th scope="col">ID Company</th>
         <th scope="col">ID Type</th>
+        <th scope="col">ID Company</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -292,8 +292,8 @@
         <td ng-model="id_user">{{invoice.id_user}}</td>
         <td ng-model="name_service">{{invoice.name_service}}</td>
         <td ng-model="total">{{invoice.total}}</td>
-        <td ng-model="company_id">{{invoice.company_id.name}}</td>
-        <td ng-model="type_id">{{invoice.type_id.name_invoice}}</td>
+        <td ng-model="type_idId">{{invoice.type_idId}}</td>
+        <td ng-model="company_idId">{{invoice.company_idId}}</td>
         <td style="display:flex; margin-left:-100px">
             <button style="margin-right:10px" data-toggle="modal" data-target="#myModal" class="edit"
                     ng-click="editInvoice(invoice)">

@@ -6,6 +6,7 @@ import com.example.invoice.service.InvoiceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,16 @@ public class InvoiceController {
     @Autowired
     ObjectMapper objectMapper;
 
+//    @RequestMapping(value = "/invoices", method = RequestMethod.GET)
+//    public ResponseEntity<List<InvoiceEntity>> getAllInvoice(){
+//        return new ResponseEntity<List<InvoiceEntity>>(invoiceService.getAllInvoice(), HttpStatus.OK);
+//    }
+
     @RequestMapping(value = "/invoices", method = RequestMethod.GET)
-    public ResponseEntity<List<InvoiceEntity>> getAllInvoice(){
-        return new ResponseEntity<List<InvoiceEntity>>(invoiceService.getAllInvoice(), HttpStatus.OK);
+    public List<InvoiceDTO> getAllInvoice(){
+        List<InvoiceDTO> invoiceDTOS
+                = modelMapper.map(invoiceService.getAllInvoice(), new TypeToken<List<InvoiceDTO>>() {}.getType());
+        return invoiceDTOS;
     }
 
     @RequestMapping(value = "/invoices/{id}", method = RequestMethod.GET)
