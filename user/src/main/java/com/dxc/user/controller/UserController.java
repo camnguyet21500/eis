@@ -32,8 +32,8 @@ public class UserController {
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
-        String siteURL = Utility.getSiteURL(request);
-        userService.sendVerificationEmail(userEntity, siteURL);
+//        String siteURL = Utility.getSiteURL(request);
+//        userService.sendVerificationEmail(userEntity, siteURL);
         return ResponseEntity.ok().body(this.userService.createUser(userEntity));
     }
 

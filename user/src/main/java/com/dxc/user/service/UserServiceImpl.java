@@ -26,42 +26,42 @@ public class UserServiceImpl implements UserService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    JavaMailSender mailSender;
+//    @Autowired
+//    JavaMailSender mailSender;
 
     @Override
     public UserEntity createUser(UserEntity userEntity) {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userEntity.setActive(false);
-
-        String randomCode = RandomString.make(64);
-        userEntity.setVerification_code(randomCode);
+//
+//        String randomCode = RandomString.make(64);
+//        userEntity.setVerification_code(randomCode);
 
         return userRepository.save(userEntity);
 
 
     }
 
-    @Override
-    public void sendVerificationEmail(UserEntity userEntity, String siteURL) throws UnsupportedEncodingException, MessagingException {
-        String subject = "Please verify your registration";
-        String senderName = "E-Invoice System";
-        String mailContent = "<p>Dear" + userEntity.getFullname() + ",</p>";
-        mailContent += "<p>Please click the link below to verify to your registration:</p>";
-        String verifyURL = siteURL + "/verify?code=" + userEntity.getVerification_code();
-        mailContent += "<h3><a href=\"" + siteURL + "\">VERIFY</a>";
-        mailContent += "<p>Thank you!<br>E-Invoice System.</p>";
-
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-
-        helper.setFrom("camnguyet.huflit@gmail.com", senderName);
-        helper.setTo(userEntity.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-
-        mailSender.send(message);
-    }
+//    @Override
+//    public void sendVerificationEmail(UserEntity userEntity, String siteURL) throws UnsupportedEncodingException, MessagingException {
+//        String subject = "Please verify your registration";
+//        String senderName = "E-Invoice System";
+//        String mailContent = "<p>Dear" + userEntity.getFullname() + ",</p>";
+//        mailContent += "<p>Please click the link below to verify to your registration:</p>";
+//        String verifyURL = siteURL + "/verify?code=" + userEntity.getVerification_code();
+//        mailContent += "<h3><a href=\"" + siteURL + "\">VERIFY</a>";
+//        mailContent += "<p>Thank you!<br>E-Invoice System.</p>";
+//
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//
+//        helper.setFrom("camnguyet.huflit@gmail.com", senderName);
+//        helper.setTo(userEntity.getEmail());
+//        helper.setSubject(subject);
+//        helper.setText(mailContent, true);
+//
+//        mailSender.send(message);
+//    }
 
     @Override
     public UserEntity updateUser(UserEntity userEntity) {
@@ -118,14 +118,14 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsername(username);
     }
 
-    @Override
-    public boolean verify(String verification_code){
-        UserEntity userEntity = userRepository.findByVerificationCode(verification_code);
-        if(userEntity == null || userEntity.isActive()){
-            return false;
-        }else{
-            userRepository.active((int) userEntity.getId());
-            return true;
-        }
-    }
+//    @Override
+//    public boolean verify(String verification_code){
+//        UserEntity userEntity = userRepository.findByVerificationCode(verification_code);
+//        if(userEntity == null || userEntity.isActive()){
+//            return false;
+//        }else{
+//            userRepository.active((int) userEntity.getId());
+//            return true;
+//        }
+//    }
 }

@@ -1,12 +1,14 @@
 package com.example.invoice.controller;
 
-import com.example.invoice.api.UserApi;
+import com.example.invoice.dto.InvoiceDTO;
 import com.example.invoice.entity.InvoiceEntity;
 import com.example.invoice.service.InvoiceService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,18 +19,26 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
     @RequestMapping(value = "/invoices", method = RequestMethod.GET)
     public ResponseEntity<List<InvoiceEntity>> getAllInvoice(){
         return new ResponseEntity<List<InvoiceEntity>>(invoiceService.getAllInvoice(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/invoices/{id}", method = RequestMethod.GET)
-    public ResponseEntity<InvoiceEntity> getInvoiceById(@PathVariable long id){
-        return ResponseEntity.ok().body(invoiceService.getInvoiceById(id));
+    public ResponseEntity<InvoiceDTO> getInvoiceById(@PathVariable long id){
+        InvoiceEntity invoiceEntity =invoiceService.getInvoiceById(id);
+        return ResponseEntity.ok().body(modelMapper.map(invoiceEntity, InvoiceDTO.class));
     }
 
     @RequestMapping(value = "/invoices", method = RequestMethod.POST)
-    public ResponseEntity<InvoiceEntity> createInvoice(@RequestBody InvoiceEntity invoiceEntity){
+    public ResponseEntity<InvoiceEntity> createInvoice(@RequestBody InvoiceDTO invoiceDTO) throws JsonProcessingException {
+        InvoiceEntity invoiceEntity =  modelMapper.map(invoiceDTO, InvoiceEntity.class);
         return ResponseEntity.ok().body(this.invoiceService.createInVoice(invoiceEntity));
     }
 

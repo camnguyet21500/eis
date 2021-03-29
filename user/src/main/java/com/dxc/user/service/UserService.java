@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
     UserEntity createUser(UserEntity userEntity);
 
-    void sendVerificationEmail(UserEntity userEntity, String siteURL) throws UnsupportedEncodingException, MessagingException;
+//    void sendVerificationEmail(UserEntity userEntity, String siteURL) throws UnsupportedEncodingException, MessagingException;
 
     UserEntity updateUser(UserEntity userEntity);
 
@@ -21,5 +21,5 @@ public interface UserService {
 
     UserEntity getUserByUsername(String username);
 
-    boolean verify(String verification_code);
+//    boolean verify(String verification_code);
 }

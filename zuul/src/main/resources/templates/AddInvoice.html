@@ -168,13 +168,18 @@
 <div>
     <form ng-submit="createInvoice()" class="login" style="width: 50%; margin: auto">
         <h3>CREATE INVOICE</h3>
+<!--        <div class="form-group">-->
+<!--            <label>ID</label>-->
+<!--            <input ng-model="invoice.id" type="number" class="form-control"/>-->
+<!--        </div>-->
+
         <div class="form-group">
             <label>Date</label>
             <input ng-model="invoice.date" type="date" class="form-control"/>
         </div>
         <div class="form-group">
             <label>ID User</label>
-            <select ng-model="invoice.id_user.id" class="form-control">
+            <select ng-model="invoice.id_user" class="form-control">
                 <option ng-repeat="user in list_users">
                     {{user.id}}
                 </option>
@@ -190,7 +195,7 @@
         </div>
         <div class="form-group">
             <label>Type ID</label>
-            <select ng-model="invoice.type_id.id" class="form-control">
+            <select ng-model="invoice.type_idId" class="form-control">
                 <option ng-repeat="typeInvoice in list_typeInvoices">
                     {{typeInvoice.id}}
                 </option>
@@ -198,7 +203,7 @@
         </div>
         <div class="form-group">
             <label>Company ID</label>
-            <select ng-model="invoice.company_id.id" class="form-control">
+            <select ng-model="invoice.company_idId" class="form-control">
                 <option ng-repeat="company in list_companies">
                     {{company.id}}
                 </option>
