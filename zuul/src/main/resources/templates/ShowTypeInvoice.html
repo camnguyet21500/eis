@@ -39,7 +39,7 @@
     var app = angular.module("myApp", []);
     app.controller("proCtrl", function ($scope, $http) {
         //SHOW TYPE INVOICE
-        $http.get("http://localhost:8662/IS/typeInvoices").then(function (reponse) {
+        $http.get("http://localhost:8662/is/typeInvoices").then(function (reponse) {
             $scope.list_typeInvoices = reponse.data;
         });
 
@@ -54,7 +54,7 @@
             //$http PUT function
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8662/IS/typeInvoices/' + $scope.typeInvoice.id,
+                url: 'http://localhost:8662/is/typeInvoices/' + $scope.typeInvoice.id,
                 data: $scope.typeInvoice
             }).then(function successCallback(response) {
                 alert("Successfully!")
@@ -68,7 +68,7 @@
             //$http DELETE function
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8662/IS/typeInvoices/' + typeInvoice.id
+                url: 'http://localhost:8662/is/typeInvoices/' + typeInvoice.id
             }).then(function successCallback(response) {
                 alert("Successfully");
                 var index = $scope.list_typeInvoices.indexOf(typeInvoice);

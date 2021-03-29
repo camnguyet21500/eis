@@ -39,7 +39,7 @@
     var app = angular.module("myApp", []);
     app.controller("proCtrl", function ($scope, $http) {
         //SHOW TYPE INVOICE
-        $http.get("http://localhost:8662/IS/typeInvoices").then(function (reponse) {
+        $http.get("http://localhost:8662/is/typeInvoices").then(function (reponse) {
             $scope.list_typeInvoices = reponse.data;
         });
 
@@ -51,7 +51,7 @@
             //$http POST function
             $http({
                 method: "POST",
-                url: "http://localhost:8662/IS/typeInvoices",
+                url: "http://localhost:8662/is/typeInvoices",
                 data: $scope.typeInvoice,
             }).then(
                 function successCallback(response) {

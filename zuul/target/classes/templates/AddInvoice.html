@@ -38,7 +38,7 @@
     var app = angular.module("myApp", []);
     app.controller("proCtrl", function ($scope, $http) {
         //SHOW INVOICE
-        $http.get("http://localhost:8662/IS/invoices").then(function (reponse) {
+        $http.get("http://localhost:8662/is/invoices").then(function (reponse) {
             $scope.list_invoices = reponse.data;
         });
 
@@ -48,12 +48,12 @@
         });
 
         //SHOW TYPE INVOICE
-        $http.get("http://localhost:8662/IS/typeInvoices").then(function (reponse) {
+        $http.get("http://localhost:8662/is/typeInvoices").then(function (reponse) {
             $scope.list_typeInvoices = reponse.data;
         });
 
          //SHOW COMPANY
-        $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
+        $http.get("http://localhost:8662/is/companies").then(function (reponse) {
             $scope.list_companies = reponse.data;
         });
 
@@ -65,7 +65,7 @@
             //$http POST function
             $http({
                 method: "POST",
-                url: "http://localhost:8662/IS/invoices",
+                url: "http://localhost:8662/is/invoices",
                 data: $scope.invoice,
 
             }).then(
@@ -168,11 +168,6 @@
 <div>
     <form ng-submit="createInvoice()" class="login" style="width: 50%; margin: auto">
         <h3>CREATE INVOICE</h3>
-<!--        <div class="form-group">-->
-<!--            <label>ID</label>-->
-<!--            <input ng-model="invoice.id" type="number" class="form-control"/>-->
-<!--        </div>-->
-
         <div class="form-group">
             <label>Date</label>
             <input ng-model="invoice.date" type="date" class="form-control"/>
@@ -181,7 +176,7 @@
             <label>ID User</label>
             <select ng-model="invoice.id_user" class="form-control">
                 <option ng-repeat="user in list_users">
-                    {{user.id}}
+                    {{user.fullname}}
                 </option>
             </select>
         </div>

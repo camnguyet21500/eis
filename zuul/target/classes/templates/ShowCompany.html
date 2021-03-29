@@ -38,7 +38,7 @@
     var app = angular.module("myApp", []);
     app.controller("proCtrl", function ($scope, $http) {
         //SHOW COMPANY
-        $http.get("http://localhost:8662/IS/companies").then(function (reponse) {
+        $http.get("http://localhost:8662/is/companies").then(function (reponse) {
             $scope.list_companies = reponse.data;
         });
 
@@ -54,7 +54,7 @@
             //$http PUT function
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8662/IS/companies/' + $scope.company.id,
+                url: 'http://localhost:8662/is/companies/' + $scope.company.id,
                 data: $scope.company
             }).then(function successCallback(response) {
                 alert("Successfully")
@@ -68,7 +68,7 @@
             //$http DELETE function
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8662/IS/companies/' + company.id
+                url: 'http://localhost:8662/is/companies/' + company.id
             }).then(function successCallback(response) {
                 alert("Successfully");
                 var index = $scope.list_companies.indexOf(company);
