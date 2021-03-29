@@ -4,16 +4,13 @@ package com.example.invoice.dto;
 public class InvoiceDTO {
     private long id;
     private String date;
-//    private long id_user;
-private String fullname;
+    private long id_user;
+
     private String name_service;
     private float total;
-//    private long type_idId;
+    private long type_idId;
 
-//    private long company_idId;
-    private String name_invoice;
-
-    private String name;
+    private long company_idId;
 
     public long getId() {
         return id;
@@ -31,22 +28,13 @@ private String fullname;
         this.date = date;
     }
 
-    public String getFullname() {
-        return fullname;
+    public long getId_user() {
+        return id_user;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setId_user(long id_user) {
+        this.id_user = id_user;
     }
-
-    //
-//    public long getId_user() {
-//        return id_user;
-//    }
-//
-//    public void setId_user(long id_user) {
-//        this.id_user = id_user;
-//    }
 
     public String getName_service() {
         return name_service;
@@ -64,36 +52,19 @@ private String fullname;
         this.total = total;
     }
 
-//    public long getType_idId() {
-//        return type_idId;
-//    }
-//
-//    public void setType_idId(long type_idId) {
-//        this.type_idId = type_idId;
-//    }
-//
-//    public long getCompany_idId() {
-//        return company_idId;
-//    }
-//
-//    public void setCompany_idId(long company_idId) {
-//        this.company_idId = company_idId;
-//    }
-
-
-    public String getName_invoice() {
-        return name_invoice;
+    public long getType_idId() {
+        return type_idId;
     }
 
-    public void setName_invoice(String name_invoice) {
-        this.name_invoice = name_invoice;
+    public void setType_idId(long type_idId) {
+        this.type_idId = type_idId;
     }
 
-    public String getName() {
-        return name;
+    public long getCompany_idId() {
+        return company_idId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompany_idId(long company_idId) {
+        this.company_idId = company_idId;
     }
 }

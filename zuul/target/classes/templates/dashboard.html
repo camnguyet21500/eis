@@ -43,6 +43,42 @@
             $scope.list_invoices = reponse.data;
         });
 
+        //SHOW USER
+        $http.get("http://localhost:8662/users").then(function (reponse) {
+            $scope.list_users = reponse.data;
+        });
+
+        //SHOW TYPE INVOICE
+        $http.get("http://localhost:8662/is/typeInvoices").then(function (reponse) {
+            $scope.list_typeInvoices = reponse.data;
+        });
+
+         //SHOW COMPANY
+        $http.get("http://localhost:8662/is/companies").then(function (reponse) {
+            $scope.list_companies = reponse.data;
+        });
+
+        //BUTTONS SETTING
+        $scope.update = false;
+        $scope.cancel = false;
+        $scope.invoiceid = false;
+        $scope.updateForm = false;
+
+        //UPDATE COMPANY
+        $scope.updateInvoice = function () {
+
+            //$http PUT function
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8662/is/invoices/' + $scope.invoice.id,
+                data: $scope.invoice
+            }).then(function successCallback(response) {
+                alert("Successfully")
+            }, function errorCallback(response) {
+                alert("Error. Try Again!");
+            });
+        };
+
 
         //DELETE INVOICE
         $scope.deleteInvoice = function (invoice) {
@@ -57,6 +93,25 @@
             }, function errorCallback(response) {
                 alert("Error. while deleting user Try Again!");
             });
+        };
+
+        //Set $scope on Edit button click
+        $scope.editInvoice = function (invoice) {
+
+            $scope.invoice = invoice;
+            $scope.update = true;
+            $scope.cancel = true;
+            $scope.invoiceid = false;
+            $scope.updateForm = true;
+        };
+
+
+        //CANCEL UPDATE
+        $scope.cancelUpdate = function () {
+            $scope.invoice = null;
+            $scope.update = false;
+            $scope.cancel = false;
+            $scope.invoiceid = true;
         };
     });
 </script>
@@ -144,6 +199,77 @@
         </div>
     </nav>
 </header>
+<div>
+    <!-- <h2>E-INVOICE</h2> -->
+    <div class="container">
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Invoice</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="login" style="width: 50%; margin: auto;" ng-show="updateForm">
+                            <div class="form-group" ng-show="invoiceid">
+                                <label>ID</label>
+                                <input ng-model="invoice.id" type="number" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input ng-model="invoice.date" type="date" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label>ID User</label>
+                                <select ng-model="invoice.id_user" class="form-control">
+                                    <option ng-repeat="user in list_users">
+                                        {{user.id}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Name Service</label>
+                                <input ng-model="invoice.name_service" type="text" class="form-control" placeholder="Please enter name service" />
+                            </div>
+                            <div class="form-group">
+                                <label>Total</label>
+                                <input ng-model="invoice.total" type="number" class="form-control" placeholder="Please enter total" />
+                            </div>
+                            <div class="form-group">
+                                <label>Type ID</label>
+                                <select ng-model="invoice.type_idId" class="form-control">
+                                    <option ng-repeat="typeInvoice in list_typeInvoices">
+                                        {{typeInvoice.id}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Company ID</label>
+                                <select ng-model="invoice.company_idId" class="form-control">
+                                    <option ng-repeat="company in list_companies">
+                                        {{company.id}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <input type="button" value="Update" ng-click="updateInvoice()"
+                                   class="btn btn-success btn-sm"
+                                   style="width: 30%; margin: auto; margin-bottom: 30px;" ng-show="update" />
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <h2 style="text-align: center">Invoice</h2>
 <table class="table table-hover">
