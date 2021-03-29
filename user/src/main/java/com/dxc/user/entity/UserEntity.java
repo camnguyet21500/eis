@@ -38,8 +38,7 @@ public class UserEntity {
     @NotNull
     @Column(name="email")
     private String email;
-
-    @NotNull
+    
     @Column(name="limit_consume")
     private float limit_consume;
 
