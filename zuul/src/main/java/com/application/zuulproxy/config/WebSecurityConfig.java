@@ -55,8 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+    http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/dashboard").hasRole("USER")
+                .antMatchers("/showUser", "/showTypeInvoice", "/showCompany", "/dashboard", "/addUser", "/addTypeInvoice", "/addInvoice", "/addCompany").hasRole("ADMIN")
                 .antMatchers("/", "/home").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
                 .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                 .and()
@@ -66,7 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll() // Tất cả đều được truy cập vào địa chỉ này
                 .and()
                 .logout() // Cho phép logout
-                .permitAll();
+                .permitAll()
+                .and()
+            .exceptionHandling()
+                .accessDeniedPage("/403");
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

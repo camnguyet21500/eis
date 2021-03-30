@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserEntity createUser(UserEntity userEntity) {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        userEntity.setActive(false);
+        userEntity.setActive(true);
 //
 //        String randomCode = RandomString.make(64);
 //        userEntity.setVerification_code(randomCode);

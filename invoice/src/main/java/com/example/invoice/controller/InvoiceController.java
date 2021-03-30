@@ -10,6 +10,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +27,7 @@ public class InvoiceController {
     @Autowired
     ObjectMapper objectMapper;
 
-//    @RequestMapping(value = "/invoices", method = RequestMethod.GET)
-//    public ResponseEntity<List<InvoiceEntity>> getAllInvoice(){
-//        return new ResponseEntity<List<InvoiceEntity>>(invoiceService.getAllInvoice(), HttpStatus.OK);
-//    }
-
-    @RequestMapping(value = "/invoices", method = RequestMethod.GET)
+    @RequestMapping(value = "/invoices", method = RequestMethod.GET, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     public List<InvoiceDTO> getAllInvoice(){
         List<InvoiceDTO> invoiceDTOS
                 = modelMapper.map(invoiceService.getAllInvoice(), new TypeToken<List<InvoiceDTO>>() {}.getType());

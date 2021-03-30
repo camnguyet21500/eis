@@ -2,6 +2,7 @@ package com.application.zuulproxy.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,10 @@ public class HomeController {
 //        }
         return "login";
     }
-
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "403";
+    }
     @GetMapping("/showUser")
     public String showUser() {
         return "ShowUser"; // Trả về hello.html
@@ -73,4 +77,10 @@ public class HomeController {
     public String addCompany() {
         return "AddCompany"; // Trả về hello.html
     }
+
+    @GetMapping("/chart")
+    public String chart() {
+        return "Chart"; // Trả về hello.html
+    }
+
 }
