@@ -18,7 +18,7 @@ public class UserEntity {
 
     @NotNull
     @Column(name = "username")
-    @Size(min = 2, max = 20)
+    @Size(min = 6, max = 12)
     private String username;
 
     @NotNull
@@ -27,7 +27,7 @@ public class UserEntity {
 
     @NotNull
     @Column(name="fullname")
-    @Size(min = 10, max = 45)
+    @Size(min = 6, max = 30)
     private String fullname;
 
     @NotNull
