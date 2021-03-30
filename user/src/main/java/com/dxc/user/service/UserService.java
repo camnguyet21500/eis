@@ -21,5 +21,8 @@ public interface UserService {
 
     UserEntity getUserByUsername(String username);
 
+    UserEntity getAccount(String username, String password);
+
+
 //    boolean verify(String verification_code);
 }

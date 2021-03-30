@@ -118,6 +118,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsername(username);
     }
 
+
+    @Override
+    public UserEntity getAccount(String username, String password){
+        return userRepository.findByUsernameAndPassword(username, password);
+    }
 //    @Override
 //    public boolean verify(String verification_code){
 //        UserEntity userEntity = userRepository.findByVerificationCode(verification_code);

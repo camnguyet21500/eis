@@ -52,4 +52,12 @@ public class UserController {
     public ResponseEntity<UserEntity> getUserByUsername(@PathVariable String username) {
         return new ResponseEntity<UserEntity>(userService.getUserByUsername(username), HttpStatus.OK);
     }
+
+
+    @GetMapping(value = "/validate")
+    public ResponseEntity<UserEntity> validate(
+            @RequestParam(name = "username") String username,
+            @RequestParam(name = "password") String password) {
+        return ResponseEntity.ok(userService.getAccount(username, password));
+    }
 }

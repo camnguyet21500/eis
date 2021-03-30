@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     public UserEntity findByUsername(String username);
 
+    public UserEntity findByUsernameAndPassword(String username, String password);
+
 //    @Query("UPDATE User c SET c.active = true WHERE c.id = ?1")
 //    @Modifying
 //    public void active(Integer id);
